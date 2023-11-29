@@ -1,3 +1,3 @@
 # ThomasAlgorithm
 
-[![Build Status](https://github.com/ChristianABusch/ThomasAlgorithm.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/ChristianABusch/ThomasAlgorithm.jl/actions/workflows/CI.yml?query=branch%3Amain)
+For details see: [Wikipedia](https://en.wikipedia.org/wiki/Tridiagonal_matrix_algorithm)
