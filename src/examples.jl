@@ -23,9 +23,6 @@ function solve_Poisson_equation(pos, ρ, Φ₀, Φₙ)
     ε₀ = 8.854188f-12
     d  = -dx^2/ε₀ .* ρ
 
-    # potential values at boundaries
-    Φ₀, Φₙ = 100, 10 
-
     # left boundary 
     # equation: b[1] ⋅ x[1] + c[1] x[2] = d[1] 
     # Our boundary condition: x[1] = Φ₀
