@@ -1,0 +1,13 @@
+name = "ThomasAlgorithm"
+uuid = "c282d8eb-c68b-4bf5-81b0-962be7eb71c5"
+authors = ["Christian Busch"]
+version = "1.0.0-DEV"
+
+[compat]
+julia = "1"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
