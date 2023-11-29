@@ -2,7 +2,7 @@ function solve_Poisson_equation(pos, ρ, Φ₀, Φₙ)
     # pos: positions
     # ρ:   space charge density in [C m^-3]
     # Φ₀:  potential at pos[1]
-    # Φₙ:  potential at pos[1]
+    # Φₙ:  potential at pos[N]
 
     N = length(pos)
     @assert length(pos) == length(ρ) # equal lengths
