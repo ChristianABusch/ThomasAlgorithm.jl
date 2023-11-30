@@ -1,45 +1,41 @@
-function solve_Poisson_equation(pos, ρ, Φ₀, Φₙ)
-    # pos: positions
-    # ρ:   space charge density in [C m^-3]
-    # Φ₀:  potential at pos[1]
-    # Φₙ:  potential at pos[N]
+function solve_Poisson_equation(x, f, g₀, gₙ)
+    # solve the Poisson equation
+    # Δu(x) = -f(x), with Diriclet boundary condition u(x[1])=g₀, u(x[end])=gₙ 
 
-    N = length(pos)
-    @assert length(pos) == length(ρ) # equal lengths
+    N = length(x)
+    @assert length(x) == length(f) # equal lengths
     
-    dx = diff(pos)[1] 
-    @assert all(δ ->  isapprox(δ,dx), diff(pos)) # equidistant grid
+    dx = diff(x)[1] 
+    @assert all(δ ->  isapprox(δ,dx), diff(x)) # equidistant grid
 
-    # define Poisson equation in 1D with the boundary conditions Φ[1] = Φ₀, Φ[N] = Φₙ
     # central second derivative stencil
-    a  = fill(1, N)
+    a  = fill(1,  N)
     b  = fill(-2, N)
-    c  = fill(1, N)
+    c  = fill(1,  N)
 
-    a[1] = 0   # has no 1st element
+    a[1] = 0.0 # has no 1st element
     c[N] = 0.0 # has no Nth element
 
     # define RHS
-    ε₀ = 8.854188f-12
-    d  = -dx^2/ε₀ .* ρ
+    d  = -dx^2 .* f
 
     # left boundary 
-    # equation: b[1] ⋅ x[1] + c[1] x[2] = d[1] 
-    # Our boundary condition: x[1] = Φ₀
-    # identify: c[1]=0, b[1]=1, d[1]=Φ₀
+    # equation: b[1] ⋅ u[1] + c[1] u[2] = d[1] 
+    # Our boundary condition: u[1] = g₀
+    # identify: c[1]=0, b[1]=1, d[1]=g₀
     b[1] = 1 
     c[1] = 0
-    d[1] = Φ₀
+    d[1] = g₀
 
     # right boundary 
-    # equation: a[n] ⋅ x[n-1] + b[n] x[n] = d[n] 
-    # Our boundary condition: x[n] = Φₙ
-    # identify: a[n]=0, b[n]=1, d[n]=Φₙ
+    # equation: a[n] ⋅ u[n-1] + b[n] u[n] = d[n] 
+    # Our boundary condition: u[n] = gₙ
+    # identify: a[n]=0, b[n]=1, d[n]=gₙ
     b[N] = 1
     a[N] = 0
-    d[N] = Φₙ
+    d[N] = gₙ
 
     # solve system
-    Φ = Thomas_algorithm(a, b, c, d)
-    return Φ  
+    u = Thomas_algorithm(a, b, c, d)
+    return u 
 end  
