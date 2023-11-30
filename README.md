@@ -18,9 +18,9 @@ A function for solving the Poisson equation in 1D using the Thomas algorithm is 
 
 ### Example
 The solution to the Poisson equation
-$$\frac{d^2 u}{d x^2} = - f(x),  \quad x \in [-10, 10], \quad f(x)=\cos(\frac{\pi}{2L}x)$$
+$$\frac{d^2 u}{d x^2} = - f(x),  \quad x \in [-L, L], \quad f(x)=\cos(\frac{\pi}{2L}x), \quad L =10$$
 with the Diriclet boundary condition
-$$u(-10)=-10, u(10) = 20$$
+$$u(-L)=-10, \quad u(L) = 20$$
 can be found as follows:
 
 ```julia
